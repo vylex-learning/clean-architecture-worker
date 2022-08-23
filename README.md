@@ -2,7 +2,7 @@
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
 
-![image](https://user-images.githubusercontent.com/111821642/186047189-24c195c9-f1c0-425f-9620-18ebfae7c78d.png)
+![clean-architecture](https://user-images.githubusercontent.com/111821642/186151924-57879755-1c4a-40df-ada0-ee1497056b83.jpeg)
 
 # First steps
 
