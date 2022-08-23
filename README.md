@@ -2,6 +2,8 @@
 [![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
 [![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
 
+![image](https://user-images.githubusercontent.com/111821642/186047189-24c195c9-f1c0-425f-9620-18ebfae7c78d.png)
+
 # First steps
 
 - Create your Cloudflare account: https://dash.cloudflare.com/sign-up
