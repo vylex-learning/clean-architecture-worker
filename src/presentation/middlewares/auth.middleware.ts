@@ -1,6 +1,6 @@
 import { forbidden, ok, serverError } from '@/presentation/helpers/http.helper';
 import { AccessDeniedError } from '@/presentation/errors/access.denied.error';
-import { LoadAccountByToken } from '@/domain/usecases/load.account.by.token';
+import { LoadAccountByToken } from '@/domain/usecases/account/load.account.by.token';
 import { Middleware } from '@/presentation/protocols/middleware';
 import { HttpResponse } from '@/presentation/protocols/http';
 

@@ -1,4 +1,4 @@
-import { Controller } from '@/presentation/protocols/controiller';
+import { Controller } from '@/presentation/protocols/controller';
 import { Request } from 'itty-router';
 
 export const adaptRoute = (controller: Controller) => {

@@ -4,7 +4,7 @@ import { Variables } from 'graphql-request';
 
 export const faundaApi = async (
   gql: DocumentNode,
-  env?: EnvironmentVars,
+  env: EnvironmentVars | undefined,
   variables?: Variables,
 ): Promise<string> => {
   const options = {
