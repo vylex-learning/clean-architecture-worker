@@ -1,9 +1,9 @@
 import { EnvironmentVars } from '@/infra/config/environment.var';
 import { Controller } from '@/presentation/protocols/controller';
-import { Environment } from '@/main/config/environments';
+import { EnvironmentSingleton } from '@/main/config/environments.singleton';
 import { Request } from 'itty-router';
 
-const envInstance = Environment.getInstance();
+const envInstance = EnvironmentSingleton.getInstance();
 
 export const adaptRoute = (controller: Controller) => {
   return async (request: Request, env: EnvironmentVars): Promise<Response> => {

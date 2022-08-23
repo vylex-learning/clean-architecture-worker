@@ -2,9 +2,9 @@ import { CreateContactRepository } from '@/data/protocols/database/create.contac
 import createContactQuery from '@/infra/database/fauna/contact/mutations/create.contact';
 import { CreateContact } from '@/domain/usecases/contact/create.contact';
 import { faundaApi } from '@/infra/database/fauna/fauna.api';
-import { Environment } from '@/main/config/environments';
+import { EnvironmentSingleton } from '@/main/config/environments.singleton';
 
-const envInstance = Environment.getInstance();
+const envInstance = EnvironmentSingleton.getInstance();
 
 export class ContactRepository implements CreateContactRepository {
   async create(data: CreateContact.Params): Promise<boolean> {
