@@ -1,0 +1,18 @@
+name = "imps-api"
+main = "src/server.ts"
+minify = true
+compatibility_date = "2022-08-20"
+route = "api.imps.com.br/*"
+
+[vars]
+JWT_SECRET_KEY = "c2RnZnNkZmdoZnNkaGdmZA"
+FAUNADB_API = "https://graphql.us.fauna.com/graphql"
+FAUNADB_SECRET = ""
+
+[env.staging]
+name = "imps-api-staging"
+route = "staging.api.imps.com.br/*"
+
+[env.develop]
+name = "imps-api-develop"
+route = "develop.api.imps.com.br/*"

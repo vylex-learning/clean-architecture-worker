@@ -1,0 +1,160 @@
+type User {
+  firstName: String!
+  lastName: String!
+  email: String! @unique
+  password: String
+  birthday: Time
+  roles: [UserRole]
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+type Contact {
+  fullName: String!
+  email: String!
+  message: String!
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+type UserRole @embedded {
+  name: String!
+  user: User
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+type Domain {
+  url: String! @unique
+  owner: User!
+  billingUser: User!
+  techUser: User!
+  expires: Time!
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+type DomainCategory {
+  name: String! @unique
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input DomainCategoryInput {
+  name: String!
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+type Log {
+  user: ID
+  type: String!
+  message: String!
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input LogInput {
+  user: ID
+  type: String!
+  message: String!
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input UserFilterInput {
+  email: String
+}
+
+input PartialUpdateDomainCategoryInput {
+  name: String
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input PartialUpdateDomainInput {
+  url: String
+  owner: DomainOwnerRelation
+  billingUser: DomainBillingUserRelation
+  techUser: DomainTechUserRelation
+  expires: Time
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input DomainInput {
+  url: String!
+  owner: DomainOwnerRelation
+  billingUser: DomainBillingUserRelation
+  techUser: DomainTechUserRelation
+  expires: Time!
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input DomainOwnerRelation {
+  create: UserInput
+  connect: ID
+}
+
+input DomainTechUserRelation {
+  create: UserInput
+  connect: ID
+}
+
+input DomainBillingUserRelation {
+  create: UserInput
+  connect: ID
+}
+
+input PartialUpdateLogInput {
+  user: ID
+  type: String
+  message: String
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input PartialUpdateUserInput {
+  firstName: String
+  lastName: String
+  email: String
+  password: String
+  birthday: Time
+  roles: [PartialUpdateUserRoleInput]
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input PartialUpdateUserRoleInput {
+  name: String
+  user: ID
+  createdAt: Time
+  updatedAt: Time
+  deletedAt: Time
+}
+
+input UserRoleUserRelation {
+  create: UserInput
+  connect: ID
+  disconnect: Boolean
+}
+
+type Query {
+  allUsers: [User!]
+  allUserRoles: [UserRole!]
+  allLogs: [Log]!
+}

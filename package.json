@@ -1,0 +1,39 @@
+{
+  "name": "api-module-system",
+  "version": "0.0.1",
+  "description": "IMPS API model",
+  "author": "Henrique Bissoli Silva",
+  "license": "GPL-3.0-or-later",
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "typescript",
+      "prettier"
+    ]
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.14.1",
+    "@types/graphql": "^14.5.0",
+    "@types/jest": "^28.1.7",
+    "@types/validator": "^13.7.5",
+    "graphql": "^16.6.0",
+    "graphql-request": "^4.3.0",
+    "graphql-tag": "^2.12.6",
+    "itty-router": "^2.6.1",
+    "jest": "^28.1.3",
+    "prettier": "^2.7.1",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.7.4",
+    "typescript-module-alias": "^2.2.9",
+    "validator": "^13.7.0",
+    "wrangler": "2.0.26"
+  },
+  "private": true,
+  "scripts": {
+    "start": "wrangler dev",
+    "deploy:develop": "wrangler publish -e develop",
+    "deploy:staging": "wrangler publish -e staging",
+    "deploy": "wrangler publish",
+    "format": "prettier --write  '*.{json,js}' 'src/**/*.{js,ts,gql}'"
+  }
+}
