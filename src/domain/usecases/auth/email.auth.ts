@@ -1,14 +1,12 @@
+import { User } from '@/domain/models/user/user.entity';
+
 export interface EmailAuth {
-  execute: (data: EmailAuth.Params) => Promise<boolean>;
+  isEmailAuthValid: (data: EmailAuth.Params) => Promise<User | undefined>;
 }
 
 export namespace EmailAuth {
   export type Params = {
-    body: {
-      email: string;
-      password: string;
-      stayLogged: boolean;
-      captchaResponse: string;
-    };
+    email: string;
+    password: string;
   };
 }

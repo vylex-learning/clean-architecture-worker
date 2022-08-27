@@ -8,6 +8,9 @@ route = "api.imps.com.br/*"
 JWT_SECRET_KEY = "c2RnZnNkZmdoZnNkaGdmZA"
 FAUNADB_API = "https://graphql.us.fauna.com/graphql"
 FAUNADB_SECRET = ""
+HCAPTCHA_VERIFY_URL = "https://hcaptcha.com/siteverify"
+HCAPTCHA_SITE_KEY = ""
+HCAPTCHA_SECRET = ""
 
 [env.staging]
 name = "imps-api-staging"
