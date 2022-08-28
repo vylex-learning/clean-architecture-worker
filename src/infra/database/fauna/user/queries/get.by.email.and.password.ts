@@ -1,14 +1,11 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query allContacts {
-    allContacts {
-      data {
-        fulltName
-        email
-        message
-        createdAt
-      }
+  query findUserByEmail($email: String!) {
+    findUserByEmail(email: $email) {
+      firstName
+      email
+      password
     }
   }
 `;

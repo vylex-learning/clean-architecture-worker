@@ -1,21 +1,22 @@
-type User {
+type User @collection(name: "users") @generateUDFResolvers {
   firstName: String!
   lastName: String!
   email: String! @unique
+  doc: String! @unique
   password: String
   birthday: Date
   roles: [UserRole]
-  createdAt: Date
-  updatedAt: Date
+  createdAt: Date!
+  updatedAt: Date!
   deletedAt: Date
 }
 
-type Contact {
+type Contact @collection(name: "contacts") @generateUDFResolvers {
   fullName: String!
   email: String!
   message: String!
-  createdAt: Date
-  updatedAt: Date
+  createdAt: Date!
+  updatedAt: Date!
   deletedAt: Date
 }
 
@@ -24,134 +25,33 @@ enum UserRole {
   ADMIN
 }
 
-type Domain {
+type Domain @collection(name: "domains") {
   url: String! @unique
   owner: User!
   billingUser: User!
   techUser: User!
   expires: Date!
-  createdAt: Date
-  updatedAt: Date
+  createdAt: Date!
+  updatedAt: Date!
   deletedAt: Date
 }
 
-type DomainCategory {
+type DomainCategory @collection(name: "domains_category") @generateUDFResolvers {
   name: String! @unique
-  createdAt: Date
-  updatedAt: Date
+  createdAt: Date!
+  updatedAt: Date!
   deletedAt: Date
 }
 
-input DomainCategoryInput {
-  name: String!
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-type Log {
+type Log @collection(name: "logs") @generateUDFResolvers {
   user: ID
   type: String!
   message: String!
-  createdAt: Date
-  updatedAt: Date
+  createdAt: Date!
+  updatedAt: Date!
   deletedAt: Date
-}
-
-input LogInput {
-  user: ID
-  type: String!
-  message: String!
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input UserFilterInput {
-  email: String
-}
-
-input PartialUpdateDomainCategoryInput {
-  name: String
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input PartialUpdateDomainInput {
-  url: String
-  owner: DomainOwnerRelation
-  billingUser: DomainBillingUserRelation
-  techUser: DomainTechUserRelation
-  expires: Date
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input DomainInput {
-  url: String!
-  owner: DomainOwnerRelation
-  billingUser: DomainBillingUserRelation
-  techUser: DomainTechUserRelation
-  expires: Date!
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input DomainOwnerRelation {
-  create: UserInput
-  connect: ID
-}
-
-input DomainTechUserRelation {
-  create: UserInput
-  connect: ID
-}
-
-input DomainBillingUserRelation {
-  create: UserInput
-  connect: ID
-}
-
-input PartialUpdateLogInput {
-  user: ID
-  type: String
-  message: String
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input PartialUpdateUserInput {
-  firstName: String
-  lastName: String
-  email: String
-  password: String
-  birthday: Date
-  roles: [PartialUpdateUserRoleInput]
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input PartialUpdateUserRoleInput {
-  name: String
-  user: ID
-  createdAt: Date
-  updatedAt: Date
-  deletedAt: Date
-}
-
-input UserRoleUserRelation {
-  create: UserInput
-  connect: ID
-  disconnect: Boolean
 }
 
 type Query {
-  allUsers: [User!]
-  allUserRoles: [UserRole!]
-  allLogs: [Log]!
+  findUserByEmail(email: String!): User @resolver(name: "findUserByEmail")
 }

@@ -1,7 +1,7 @@
 {
-  "name": "api-module-system",
+  "name": "vylex-learning-clean-architecture",
   "version": "0.0.1",
-  "description": "IMPS API model",
+  "description": "Vylex API model",
   "author": "Henrique Bissoli Silva",
   "license": "GPL-3.0-or-later",
   "eslintConfig": {

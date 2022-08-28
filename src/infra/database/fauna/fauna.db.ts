@@ -2,9 +2,6 @@ import { EnvironmentSingleton } from '@/main/config/environments.singleton';
 import { DocumentNode, print } from 'graphql';
 import { Variables } from 'graphql-request';
 
-const envInstance = EnvironmentSingleton.getInstance();
-const env = envInstance.getEnv();
-
 export interface FaunaApiHelper<T = any> {
   execute: (gql: DocumentNode, variables?: Variables) => Promise<T>;
 }
@@ -14,6 +11,9 @@ export class FaunaDb implements FaunaApiHelper {
     gql: DocumentNode,
     variables?: Variables | undefined,
   ): Promise<any> {
+    const envInstance = EnvironmentSingleton.getInstance();
+    const env = envInstance.getEnv();
+
     const options = {
       method: 'POST',
       headers: {
@@ -25,7 +25,10 @@ export class FaunaDb implements FaunaApiHelper {
         variables,
       }),
     };
-    const response = await fetch(env?.FAUNADB_API || '', options);
+    const response = await fetch(
+      env?.FAUNADB_API || 'https://graphql.us.fauna.com/graphql',
+      options,
+    );
     return await response.json();
   }
 }
