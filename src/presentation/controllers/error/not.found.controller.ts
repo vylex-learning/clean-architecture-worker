@@ -1,13 +1,9 @@
-import { pageNotFound, serverError } from '@/presentation/helpers/http.helper';
-import { Controller } from '@/presentation/protocols/controller';
+import { pageNotFound } from '@/presentation/helpers/http.helper';
+import { IController } from '@/presentation/protocols/controller';
 import { HttpResponse } from '@/presentation/protocols/http';
 
-export class NotFoundController implements Controller {
+export class NotFoundController implements IController {
   async handle(): Promise<HttpResponse> {
-    try {
-      return pageNotFound();
-    } catch {
-      return serverError();
-    }
+    return pageNotFound();
   }
 }

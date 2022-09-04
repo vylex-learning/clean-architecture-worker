@@ -1,11 +1,13 @@
 type User @collection(name: "users") @generateUDFResolvers {
   firstName: String!
   lastName: String!
+  nickName: String!
   email: String! @unique
   doc: String! @unique
   password: String
   birthday: Date
-  roles: [UserRole]
+  image: String
+  userRole: String!
   createdAt: Date!
   updatedAt: Date!
   deletedAt: Date
@@ -20,11 +22,6 @@ type Contact @collection(name: "contacts") @generateUDFResolvers {
   deletedAt: Date
 }
 
-enum UserRole {
-  USER
-  ADMIN
-}
-
 type Domain @collection(name: "domains") {
   url: String! @unique
   owner: User!
@@ -36,7 +33,9 @@ type Domain @collection(name: "domains") {
   deletedAt: Date
 }
 
-type DomainCategory @collection(name: "domains_category") @generateUDFResolvers {
+type DomainCategory
+  @collection(name: "domains_category")
+  @generateUDFResolvers {
   name: String! @unique
   createdAt: Date!
   updatedAt: Date!
@@ -54,4 +53,6 @@ type Log @collection(name: "logs") @generateUDFResolvers {
 
 type Query {
   findUserByEmail(email: String!): User @resolver(name: "findUserByEmail")
+  findUserByEmailAndPassword(email: String!, password: String!): User
+    @resolver(name: "findUserByEmailAndPassword")
 }

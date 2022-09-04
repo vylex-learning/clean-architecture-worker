@@ -29,6 +29,7 @@
   - `HCAPTCHA_VERIFY_URL`
   - `HCAPTCHA_SITE_KEY`
   - `HCAPTCHA_SECRET`
+  - `PASSWORD_SECRET`
 
 ![image](https://user-images.githubusercontent.com/3290905/185771227-81577d86-bb2e-4713-a6da-74d826b7c275.png)
 

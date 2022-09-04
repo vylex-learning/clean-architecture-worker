@@ -7,10 +7,10 @@ export interface FaunaApiHelper<T = any> {
 }
 
 export class FaunaDb implements FaunaApiHelper {
-  async execute(
+  async execute<T>(
     gql: DocumentNode,
     variables?: Variables | undefined,
-  ): Promise<any> {
+  ): Promise<T> {
     const envInstance = EnvironmentSingleton.getInstance();
     const env = envInstance.getEnv();
 

@@ -1,51 +1,55 @@
-import { EmailValidation } from '@/validation/validators/email.validation';
-import { Controller } from '@/presentation/protocols/controller';
-import { EmailAuth } from '@/domain/usecases/auth/email.auth';
-import { HttpResponse } from '@/presentation/protocols/http';
-import { JwtTokenHandler } from '@/infra/gateway/jwt.token.handler';
+import { AuthEmailRepository } from '@/data/protocols/database/auth.email.repository';
+import { IValidation } from '@/presentation/protocols/validation';
+import { IController } from '@/presentation/protocols/controller';
+import { PasswordAdapter } from '@/infra/cryptography/password';
+import { IHttpResponse } from '@/presentation/protocols/http';
 import {
   badRequest,
   ok,
   serverError,
   unauthorized,
 } from '@/presentation/helpers/http.helper';
+import { IJwtHandler } from '@/presentation/protocols/jwt';
 
-export class EmailAuthController implements Controller {
+export class EmailAuthController implements IController {
   constructor(
-    private readonly emailAuth: EmailAuth,
-    private readonly jwtTokenHandler: JwtTokenHandler = new JwtTokenHandler(),
-    private readonly emailValidation: EmailValidation = new EmailValidation(),
+    private readonly authEmailRepository: AuthEmailRepository,
+    private readonly jwtHandler: IJwtHandler,
+    private readonly emailValidator: IValidation,
+    private readonly passwordAdapter: PasswordAdapter,
   ) {}
 
-  async handle(request: EmailAuthController.Request): Promise<HttpResponse> {
+  async handle(request: EmailAuthController.Request): Promise<IHttpResponse> {
     try {
       const { email, password, stayLogged, captchaResponse } = request.body;
-
-      const validation = this.emailValidation.validate(email);
-      if (validation) {
+      const validation = this.emailValidator.validate(email.toString());
+      if (validation instanceof Error) {
         return badRequest(validation);
       }
 
-      const user = await this.emailAuth.getUserByEmail({ email });
-      if (user === undefined) {
-        return unauthorized();
+      const passwordHash = await this.passwordAdapter.encrypt(
+        password.toString(),
+      );
+      const user = await this.authEmailRepository.getUserByEmailAndPassword({
+        email,
+        password: passwordHash,
+      });
+
+      if (user instanceof Error) {
+        return serverError(user.message);
       }
 
-      if (user && user.password === password) {
-        const { email, firstName, lastName, userRoles, userName } = user;
-        const jwt = await this.jwtTokenHandler.generate({
-          email,
-          firstName,
-          lastName,
-          userRoles,
-          userName,
-        });
-        return ok(JSON.stringify({ accessToken: jwt }));
+      if (user === null) {
+        return unauthorized(`invalid.auth`);
       }
 
-      return unauthorized();
-    } catch {
-      return serverError();
+      const jwt = await this.jwtHandler.generate({
+        ...user,
+        password: null,
+      });
+      return ok(JSON.stringify({ accessToken: jwt }));
+    } catch (e) {
+      return serverError(`email.auth.error`);
     }
   }
 }

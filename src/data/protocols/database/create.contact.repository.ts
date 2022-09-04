@@ -2,7 +2,7 @@ import { CreateContact } from '@/domain/usecases/contact/create.contact';
 
 export interface CreateContactRepository {
   create: (
-    data: CreateContactRepository.Params,
+    data: CreateContact.Params,
   ) => Promise<CreateContactRepository.Result>;
 }
 

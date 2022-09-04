@@ -2,7 +2,7 @@ import { forbidden, ok, serverError } from '@/presentation/helpers/http.helper';
 import { AccessDeniedError } from '@/presentation/errors/access.denied.error';
 import { LoadAccountByToken } from '@/domain/usecases/account/load.account.by.token';
 import { Middleware } from '@/presentation/protocols/middleware';
-import { HttpResponse } from '@/presentation/protocols/http';
+import { IHttpResponse } from '@/presentation/protocols/http';
 
 export class AuthMiddleware implements Middleware {
   constructor(
@@ -10,7 +10,7 @@ export class AuthMiddleware implements Middleware {
     private readonly role?: string,
   ) {}
 
-  async handle(request: AuthMiddleware.Request): Promise<HttpResponse> {
+  async handle(request: AuthMiddleware.Request): Promise<IHttpResponse> {
     try {
       const { accessToken } = request;
       if (accessToken) {
@@ -24,7 +24,7 @@ export class AuthMiddleware implements Middleware {
       }
       return forbidden(new AccessDeniedError());
     } catch {
-      return serverError();
+      return serverError('auth.middleware.error');
     }
   }
 }

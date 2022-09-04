@@ -6,4 +6,5 @@ export interface EnvironmentVars {
   HCAPTCHA_VERIFY_URL: string;
   HCAPTCHA_SITE_KEY: string;
   HCAPTCHA_SECRET: string;
+  PASSWORD_SECRET: string;
 }

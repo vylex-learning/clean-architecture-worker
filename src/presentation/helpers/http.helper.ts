@@ -1,38 +1,36 @@
-import { UnauthorizedError } from '@/presentation/errors/unauthorized.error';
-import { ServerError } from '@/presentation/errors/server.error';
-import { HttpResponse } from '@/presentation/protocols/http';
+import { IHttpResponse } from '@/presentation/protocols/http';
 
-export const badRequest = (error: Error): HttpResponse => ({
+export const badRequest = (error: Error): IHttpResponse => ({
   statusCode: 400,
-  body: error,
+  body: JSON.stringify({ error: error.message }),
 });
 
-export const forbidden = (error: Error): HttpResponse => ({
+export const forbidden = (error: Error): IHttpResponse => ({
   statusCode: 403,
-  body: error,
+  body: JSON.stringify({ error: error.message }),
 });
 
-export const pageNotFound = (error?: string): HttpResponse => ({
+export const pageNotFound = (error?: string): IHttpResponse => ({
   statusCode: 404,
-  body: error,
+  body: JSON.stringify({ error }),
 });
 
-export const unauthorized = (): HttpResponse => ({
+export const unauthorized = (error: string): IHttpResponse => ({
   statusCode: 401,
-  body: new UnauthorizedError(),
+  body: JSON.stringify({ error }),
 });
 
-export const serverError = (error?: string): HttpResponse => ({
+export const serverError = (error: string): IHttpResponse => ({
   statusCode: 500,
-  body: new ServerError(error),
+  body: JSON.stringify({ error }),
 });
 
-export const ok = (data: any): HttpResponse => ({
+export const ok = (data: any): IHttpResponse => ({
   statusCode: 200,
   body: data,
 });
 
-export const noContent = (): HttpResponse => ({
+export const noContent = (): IHttpResponse => ({
   statusCode: 204,
   body: null,
 });

@@ -1,15 +1,20 @@
-export class Base64Adapter {
-  decrypt(text: string): string {
+import { IDecrypter } from '@/data/protocols/cryptography/decrypter';
+import { IEncrypter } from '@/data/protocols/cryptography/encrypter';
+
+export class Base64Adapter implements IDecrypter, IEncrypter {
+  async decrypt(text: string): Promise<string> {
     return atob(text);
   }
 
-  encrypt(text: string): string {
+  async encrypt(text: string): Promise<string> {
     return btoa(text).replace(/=/g, '');
   }
 
-  isBase64(text: string): boolean {
+  async isBase64(text: string): Promise<boolean> {
     try {
-      return this.encrypt(this.decrypt(text)).replace(/=/g, '') == text;
+      const decryptedText = await this.decrypt(text);
+      const encryptedText = await this.encrypt(decryptedText);
+      return encryptedText.replace(/=/g, '') == text;
     } catch {
       return false;
     }

@@ -1,5 +1,12 @@
 # Package lock
+
 package-lock.json
+
+coverage
+
+# Wrangler config
+
+*.toml
 
 # Logs
 

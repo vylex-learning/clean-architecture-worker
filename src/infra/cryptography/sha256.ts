@@ -1,4 +1,6 @@
-export class Sha256Adapter {
+import { IEncrypter } from '@/data/protocols/cryptography/encrypter';
+
+export class Sha256Adapter implements IEncrypter {
   constructor(private readonly encoder: TextEncoder = new TextEncoder()) {}
 
   async encrypt(text: string): Promise<string> {

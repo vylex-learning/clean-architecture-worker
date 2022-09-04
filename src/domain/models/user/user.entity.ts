@@ -1,19 +1,13 @@
-export type UserRoles = {
-  name: 'admin' | 'normal';
-};
-
 export type User = {
-  id: string;
-  name: string;
+  id: number;
   email: string;
   password: string;
-  userRoles: UserRoles[];
+  userRole: string;
   firstName: string;
   lastName: string;
-  userName: string;
-  avatar: string;
-  image?: string;
+  nickName: string;
   createdAt: Date;
   updatedAt: Date;
+  image?: string;
   deletedAt?: Date;
 };
