@@ -3,13 +3,13 @@ import { IValidation } from '@/presentation/protocols/validation';
 import { IController } from '@/presentation/protocols/controller';
 import { PasswordAdapter } from '@/infra/cryptography/password';
 import { IHttpResponse } from '@/presentation/protocols/http';
+import { IJwtHandler } from '@/presentation/protocols/jwt';
 import {
   badRequest,
   ok,
   serverError,
   unauthorized,
 } from '@/presentation/helpers/http.helper';
-import { IJwtHandler } from '@/presentation/protocols/jwt';
 
 export class EmailAuthController implements IController {
   constructor(

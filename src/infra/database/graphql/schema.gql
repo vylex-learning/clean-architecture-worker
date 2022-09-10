@@ -7,7 +7,7 @@ type User @collection(name: "users") @generateUDFResolvers {
   password: String
   birthday: Date
   image: String
-  userRole: String!
+  profileId: Number!
   createdAt: Date!
   updatedAt: Date!
   deletedAt: Date

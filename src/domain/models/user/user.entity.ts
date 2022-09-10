@@ -2,7 +2,7 @@ export type User = {
   id: number;
   email: string;
   password: string;
-  userRole: string;
+  profileId: number;
   firstName: string;
   lastName: string;
   nickName: string;

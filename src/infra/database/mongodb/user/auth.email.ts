@@ -1,12 +1,12 @@
-import getUserByEmailAndPasswordQuery from '@/infra/database/fauna/user/queries/get.by.email.and.password';
-import { AuthEmailResponse } from '@/data/models/database/faunadb/auth.email.response';
+import getUserByEmailAndPasswordQuery from '@/infra/database/mongodb/user/queries/get.by.email.and.password';
+import { AuthEmailResponse } from '@/data/models/database/mongodb/auth.email.response';
 import { AuthEmailRepository } from '@/data/protocols/database/auth.email.repository';
 import { UserAdapter } from '@/domain/adapters/user/user.adapter';
 import { EmailAuth } from '@/domain/usecases/auth/email.auth';
-import { FaunaDb } from '../fauna.db';
+import { MongoDb } from '../../mongodb';
 
-export class AuthRepositoryFaunaDb implements AuthEmailRepository {
-  constructor(private readonly apiDb: FaunaDb) {}
+export class AuthRepositoryMongoDb implements AuthEmailRepository {
+  constructor(private readonly apiDb: MongoDb) {}
 
   async getUserByEmailAndPassword(
     data: EmailAuth.Params,
@@ -22,7 +22,7 @@ export class AuthRepositoryFaunaDb implements AuthEmailRepository {
         },
       );
 
-      const user = userResult?.data?.findUserByEmailAndPassword || null;
+      const user = userResult?.data?.user || null;
       if (user === null) {
         return null;
       }

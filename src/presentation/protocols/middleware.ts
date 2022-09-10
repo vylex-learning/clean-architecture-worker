@@ -1,5 +1,5 @@
 import { IHttpResponse } from '@/presentation/protocols/http';
 
-export interface Middleware<T = any> {
+export interface IMiddleware<T = any> {
   handle: (httpRequest: T) => Promise<IHttpResponse>;
 }

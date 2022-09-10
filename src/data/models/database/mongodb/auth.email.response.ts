@@ -1,6 +1,6 @@
 export interface AuthEmailResponse {
   data: {
-    findUserByEmailAndPassword: {
+    user: {
       _id: number;
       firstName: string;
       lastName: string;

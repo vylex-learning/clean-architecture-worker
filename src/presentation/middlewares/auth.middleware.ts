@@ -1,10 +1,10 @@
+import { LoadAccountByToken } from '@/domain/usecases/account/load.account.by.token';
 import { forbidden, ok, serverError } from '@/presentation/helpers/http.helper';
 import { AccessDeniedError } from '@/presentation/errors/access.denied.error';
-import { LoadAccountByToken } from '@/domain/usecases/account/load.account.by.token';
-import { Middleware } from '@/presentation/protocols/middleware';
+import { IMiddleware } from '@/presentation/protocols/middleware';
 import { IHttpResponse } from '@/presentation/protocols/http';
 
-export class AuthMiddleware implements Middleware {
+export class AuthMiddleware implements IMiddleware {
   constructor(
     private readonly loadAccountByToken: LoadAccountByToken,
     private readonly role?: string,

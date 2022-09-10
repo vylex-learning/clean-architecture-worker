@@ -5,7 +5,7 @@ export class UserAdapter {
     id: number;
     email: string;
     password: string;
-    userRole: string;
+    profileId: number;
     firstName: string;
     lastName: string;
     nickName: string;
@@ -18,7 +18,7 @@ export class UserAdapter {
       id: userObject.id,
       email: userObject.email,
       password: userObject.password,
-      userRole: userObject.userRole,
+      profileId: userObject.profileId,
       firstName: userObject.firstName,
       lastName: userObject.lastName,
       nickName: userObject.nickName,

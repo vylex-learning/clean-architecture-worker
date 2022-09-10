@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query findUserByEmailAndPassword($email: String!, $password: String!) {
-    findUserByEmailAndPassword(email: $email, password: $password) {
+  query ($email: String!, $password: String!) {
+    user(query: { email: $email, password: $password }) {
       _id
       firstName
       lastName
@@ -13,7 +13,9 @@ export default gql`
       profileId
       createdAt
       updatedAt
-      deletedAt
+      deletedAt {
+        isDeleted
+      }
     }
   }
 `;

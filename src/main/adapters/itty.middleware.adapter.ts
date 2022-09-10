@@ -1,7 +1,7 @@
-import { Controller } from '@/presentation/protocols/controller';
+import { IController } from '@/presentation/protocols/controller';
 import { Request } from 'itty-router';
 
-export const adaptRoute = (controller: Controller) => {
+export const adaptRoute = (controller: IController) => {
   return async (request: Request, response: Response) => {
     const requestAdapted = {
       ...{ body: request.json || {} },
