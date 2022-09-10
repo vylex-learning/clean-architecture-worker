@@ -18,6 +18,13 @@ export const adaptRoute = (controller: IController) => {
     const httpResponse = await controller.handle(requestAdapted);
     return new Response(httpResponse.body, {
       status: httpResponse.statusCode,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
+        'Access-Control-Max-Age': '86400',
+      },
     });
   };
 };
