@@ -3,6 +3,15 @@ import { EnvironmentVars } from '@/infra/config/environment.var';
 import { IController } from '@/presentation/protocols/controller';
 import { Request } from 'itty-router';
 
+const corsHeaders = {
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Credentials': 'true',
+  'Access-Control-Allow-Headers': 'referer, origin, content-type',
+  'Access-Control-Allow-Methods': 'GET,HEAD,POST,PUT,OPTIONS',
+  'Access-Control-Max-Age': '86400',
+};
+
 export const adaptRoute = (controller: IController) => {
   return async (request: Request, env: EnvironmentVars): Promise<Response> => {
     const jsonBody = (request.json && (await request.json())) || {};
@@ -18,13 +27,7 @@ export const adaptRoute = (controller: IController) => {
     const httpResponse = await controller.handle(requestAdapted);
     return new Response(httpResponse.body, {
       status: httpResponse.statusCode,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Methods': 'GET,HEAD,POST,OPTIONS',
-        'Access-Control-Max-Age': '86400',
-      },
+      headers: corsHeaders,
     });
   };
 };
