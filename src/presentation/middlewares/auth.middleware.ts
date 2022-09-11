@@ -12,10 +12,10 @@ export class AuthMiddleware implements IMiddleware {
 
   async handle(request: AuthMiddleware.Request): Promise<IHttpResponse> {
     try {
-      const { accessToken } = request;
-      if (accessToken) {
+      const { Authorization } = request.headers;
+      if (Authorization) {
         const account = await this.loadAccountByToken.load(
-          accessToken,
+          Authorization,
           this.role,
         );
         if (account) {
@@ -31,6 +31,8 @@ export class AuthMiddleware implements IMiddleware {
 
 export namespace AuthMiddleware {
   export type Request = {
-    accessToken?: string;
+    headers: {
+      Authorization: string;
+    };
   };
 }

@@ -14,6 +14,8 @@ HCAPTCHA_VERIFY_URL = "https://hcaptcha.com/siteverify"
 HCAPTCHA_SITE_KEY = ""
 HCAPTCHA_SECRET = ""
 PASSWORD_SECRET = "c2RmZ3NyZ3Rpb3BqbjQ1cGlveWd0Z2g"
+CLOUDFLARE_ACCOUNT_ID = ""
+CLOUDFLARE_PROJECT_NAME = ""
 
 [env.staging]
 name = "imps-api-staging"
